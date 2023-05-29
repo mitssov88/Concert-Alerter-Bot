@@ -23,5 +23,8 @@
     "discord-api-types": "^0.33.5",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.1"
+  },
+  "engines": {
+    "node": "18.16.0"
   }
 }
