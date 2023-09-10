@@ -107,7 +107,6 @@ client.on('presenceUpdate', (oldMember, newMember) => {
             const artists = newMember.activities[0].state.split("; ")
             const username = `${newMember.user.username}#${newMember.user.discriminator}`
             const theGuild = newMember.guild.name
-
             const guildMap = allSettings.get(theGuild)
             artists.forEach(artist => {
                 axios.get(apiUrl, {
@@ -120,17 +119,18 @@ client.on('presenceUpdate', (oldMember, newMember) => {
                   })
                     .then(response => {
                       if (response.data._embedded && response.data._embedded.events){
+                        
                         if (response.data._embedded.events[0]._embedded.attractions[0].name === artist){
-                          newMember.user.send(`Good news!\n**${artist}** has an event coming soon! \n${response.data._embedded.events[0].url}`);
+                          message += `Good news!\n**${artist}** has an event coming soon! \n${response.data._embedded.events[0].url}\n`;
                         }
                         else{
-                          newMember.user.send(`Found an event that shared some keywords!\n${response.data._embedded.events[0].url}`);                        
+                          message += `Found an event that shared some keywords!\n${response.data._embedded.events[0].url}\n`;                        
                         }
-                        newMember.user.send(`Price of a ticket starts at ${response.data._embedded.events[0].priceRanges[0].min} ${response.data._embedded.events[0].priceRanges[0].currency}`)
-
-                        // TODO:
-                        // 1. Keep track of which artists have already been mentioned TODAY?
-                        // New Command: favourites (check every day)
+                        message += `Price of a ticket starts at ${response.data._embedded.events[0].priceRanges[0].min} ${response.data._embedded.events[0].priceRanges[0].currency}`;
+                        
+                        // Send the accumulated message once
+                        newMember.user.send(message);
+                        
                       }
                     })
                     .catch(error => {
