@@ -6,7 +6,7 @@ This bot alerts you with the Ticketmaster link, and the minimum ticket price to 
 My brother and I have gotten in the habit of running this bot locally every month or so to keep us updated on what artists are performing.
 
 ## To make your own instance of this bot:
-1. Register a custom bot with Discord, give it admin privileges, as well as the bot and application.commands scopes
+1. Register a custom bot with Discord, give it admin privileges, as well as the ```bot``` and ```application.commands``` scopes
 2. Invite it to one of your Discord servers
 3. Set the ```TOKEN``` and ```CLIENT_ID``` fields of your Discord bot in the ```.env``` file
 4. Run the code locally with ```node index.js```
